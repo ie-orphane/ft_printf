@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:35:16 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/12 09:06:30 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:18:22 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	ft_conversions(va_list args, char conv, int *count)
 		ft_putchar(count, va_arg(args, int));
 	else if (conv == 's')
 		ft_putstr(count, va_arg(args, char *));
+	else if (conv == 'x' || conv == 'X')
+		ft_puthex(count, va_arg(args, unsigned long), conv);
 	else if (conv == 'p')
 	{
 		ft_putstr(count, "0x");
-		ft_puthex(count, (unsigned long)va_arg(args, void *));
+		ft_puthex(count, (unsigned long)va_arg(args, void *), 'x');
 	}
 }
 
