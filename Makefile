@@ -23,10 +23,8 @@ fclean : clean
 
 re : fclean all
 
-run : all $(NAME)
-	@./$(NAME)
-
-$(NAME) : main.c
-	@$(CC) $(CFLAGS) main.c -L. -lftprintf -o $(NAME)
+run : $(LIBRARY)
+	@$(CC) $(CFLAGS) main.c -L. -l$(NAME) -o $(NAME) && ./$(NAME)
+	@rm -f $(NAME)
 
 .PHONY : all clean fclean re run
