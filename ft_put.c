@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:00:38 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/12 11:18:39 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:32:22 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,23 @@ void	ft_putnbr(int *count, long n)
 	}
 }
 
-char	ft_to(const char x, char c)
+void	ft_puthex(int *count, unsigned long n, const char x)
 {
+	char	c;
+
+	if (n >= 16)
+		ft_puthex(count, n / 16, x);
+	c = "0123456789abcdef"[n % 16];
 	if (65 <= c && c <= 90 && x == 'x')
 		c += 32;
 	else if (97 <= c && c <= 122 && x == 'X')
 		c -= 32;
-	return (c);
+	ft_putchar(count, c);
 }
 
-void	ft_puthex(int *count, unsigned long n, const char x)
+void	ft_putunbr(int *count, unsigned long n)
 {
-	if (n >= 16)
-		ft_puthex(count, n / 16, x);
-	ft_putchar(count, ft_to(x, "0123456789abcdef"[n % 16]));
+	if (n >= 10)
+		ft_putunbr(count, n / 10);
+	ft_putchar(count, n % 10 + '0');
 }
