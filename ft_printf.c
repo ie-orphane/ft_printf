@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:35:16 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/13 10:27:03 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:20:24 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 			ft_putchar(&count, *format);
+		if (count < 0)
+			break ;
 		format++;
 	}
 	va_end(args);

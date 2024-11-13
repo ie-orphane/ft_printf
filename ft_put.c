@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:00:38 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/13 10:14:03 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:21:00 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 
 void	ft_putchar(int *count, const char c)
 {
-	write(1, &c, 1);
+	if (write(1, &c, 1) == -1)
+	{
+		(*count) = -1;
+		return ;
+	}
 	(*count) += 1;
 }
 
 void	ft_putstr(int *count, const char *s)
 {
+	size_t	s_len;
+
 	if (!s)
 		return (ft_putstr(count, "(null)"));
-	while (*s)
+	s_len = ft_strlen(s);
+	if (write(1, s, s_len) == -1)
 	{
-		write(1, s++, 1);
-		(*count) += 1;
+		(*count) = -1;
+		return ;
 	}
+	(*count) += s_len;
 }
 
 void	ft_putnbr(int *count, long n)
