@@ -6,14 +6,16 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:35:16 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/12 11:33:02 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:27:03 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conversions(va_list args, char conv, int *count)
+static void	ft_conversions(va_list args, char conv, int *count)
 {
+	void	*p;
+
 	if (conv == '%')
 		ft_putchar(count, '%');
 	else if (conv == 'c')
@@ -25,11 +27,17 @@ void	ft_conversions(va_list args, char conv, int *count)
 	else if (conv == 'u')
 		ft_putunbr(count, va_arg(args, unsigned int));
 	else if (conv == 'x' || conv == 'X')
-		ft_puthex(count, va_arg(args, unsigned long), conv);
+		ft_puthex(count, va_arg(args, unsigned int), conv);
 	else if (conv == 'p')
 	{
-		ft_putstr(count, "0x");
-		ft_puthex(count, (unsigned long)va_arg(args, void *), 'x');
+		p = va_arg(args, void *);
+		if (p == NULL)
+			ft_putstr(count, "(nil)");
+		else
+		{
+			ft_putstr(count, "0x");
+			ft_puthex(count, (unsigned long)p, 'x');
+		}
 	}
 }
 
@@ -42,7 +50,7 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && ft_strchr("%csdiuxXp", *(format + 1)))
 		{
 			ft_conversions(args, *(format + 1), &count);
 			format++;

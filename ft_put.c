@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:00:38 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/12 11:32:22 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:14:03 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void	ft_putchar(int *count, const char c)
 
 void	ft_putstr(int *count, const char *s)
 {
-	if (s)
+	if (!s)
+		return (ft_putstr(count, "(null)"));
+	while (*s)
 	{
-		while (*s)
-		{
-			write(1, s++, 1);
-			(*count) += 1;
-		}
+		write(1, s++, 1);
+		(*count) += 1;
 	}
 }
 
@@ -52,9 +51,7 @@ void	ft_puthex(int *count, unsigned long n, const char x)
 	if (n >= 16)
 		ft_puthex(count, n / 16, x);
 	c = "0123456789abcdef"[n % 16];
-	if (65 <= c && c <= 90 && x == 'x')
-		c += 32;
-	else if (97 <= c && c <= 122 && x == 'X')
+	if (97 <= c && c <= 122 && x == 'X')
 		c -= 32;
 	ft_putchar(count, c);
 }
