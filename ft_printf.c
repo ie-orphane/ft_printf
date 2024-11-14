@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:35:16 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/13 18:20:24 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/14 09:53:09 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		count;
 
+	if (write(1, 0, 0))
+		return (-1);
 	va_start(args, format);
 	count = 0;
 	while (*format)
@@ -57,8 +59,6 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 			ft_putchar(&count, *format);
-		if (count < 0)
-			break ;
 		format++;
 	}
 	va_end(args);

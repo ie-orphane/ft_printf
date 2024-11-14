@@ -6,7 +6,7 @@
 /*   By: ielyatim <ielyatim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 18:00:38 by ielyatim          #+#    #+#             */
-/*   Updated: 2024/11/13 18:21:00 by ielyatim         ###   ########.fr       */
+/*   Updated: 2024/11/14 09:53:50 by ielyatim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void	ft_putchar(int *count, const char c)
 {
-	if (write(1, &c, 1) == -1)
-	{
-		(*count) = -1;
-		return ;
-	}
+	write(1, &c, 1);
 	(*count) += 1;
 }
 
@@ -29,11 +25,7 @@ void	ft_putstr(int *count, const char *s)
 	if (!s)
 		return (ft_putstr(count, "(null)"));
 	s_len = ft_strlen(s);
-	if (write(1, s, s_len) == -1)
-	{
-		(*count) = -1;
-		return ;
-	}
+	write(1, s, s_len);
 	(*count) += s_len;
 }
 
